@@ -64,11 +64,16 @@ async function updateMovie(req,res){
 }
 
 async function deleteMovie(req,res){
-    await Movie.deleteOne({
-        _id : req.params.id
-    })
 
-    res.send(`Movie id ${req.params.id} got deleted `);
+    try{
+        await Movie.deleteOne({
+            _id : req.params.id
+        })
+    return res.send(`Movie id ${req.params.id} got deleted `);
+    }catch(err){
+        return res.status(500).send({ msg : 'Internal server error'});
+    }
+
 }
 
 module.exports = {

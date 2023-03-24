@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 const Movie = require('./models/movies.models');
+const Theatre = require('./models/theatre.model');
 const { PORT } = require('./configs/server.config');
 const { DB_URL } = require('./configs/db.config');
 
@@ -85,6 +86,52 @@ async function init(){
         releaseSatus: "RELEASED"
     });
     console.log("Movies inserted in the db");
+
+    await Theatre.collection.drop();
+    await Theatre.create({
+        name : "FunCinemas" ,
+        city : "Bangalore",
+        description : "Top class theatre" ,
+        pinCode : 560052 
+    });
+    await Theatre.create({
+        name : "PVR Cinemas - Kormangala" ,
+        city : "Bangalore",
+        description : "PVR franchise theatre" ,
+        pinCode : 560095 
+
+    });
+    await Theatre.create({
+        name : "IMax" ,
+        city : "Bangalore",
+        description : "IMax franchise theatre" ,
+        pinCode : 560095 
+
+    });
+    await Theatre.create({
+        name : "Vaibhav Theatre" ,
+        city : "Bangalore",
+        description : "Economical theatre" ,
+        pinCode : 560094
+
+    });
+
+    await Theatre.create({
+        name : "Inox" ,
+        city : "Pune",
+        description : "Top class theatre" ,
+        pinCode : 411001 
+
+    });
+    await Theatre.create({
+        name : "Sonmarg Theatre" ,
+        city : "Pune",
+        description : "Economical theatre" ,
+        pinCode : 411042 
+
+    });
+
+    console.log("Theatres created");
 }
 catch(err){
     console.log('error while inserting default entries in DB', err);
