@@ -21,7 +21,25 @@ async function getMovieBasedOnId(req, res){
     res.send(result);
 }
 
+async function createMovie(req,res){
+    const movieObject = {
+        name: req.body.name,
+        description: req.body.description,
+        casts: req.body.casts,
+        director: req.body.director,
+        trailerUrl: req.body.trailerUrl,
+        posterUrl: req.body.posterUrl,
+        language: req.body.language,
+        releaseDate: req.body.releaseDate,
+        releaseSatus: req.body.releaseSatus
+    }
+
+    const movie = await Movie.create(movieObject);
+    res.status(201).send(movie);
+}
+
 module.exports = {
     getAllMovies,
-    getMovieBasedOnId
+    getMovieBasedOnId,
+    createMovie
 }
