@@ -27,55 +27,44 @@ async function getTheatreBasedOnId(req, res){
     res.send(result);
 }
 
-async function createMovie(req,res){
-    const movieObject = {
+async function createTheatre(req,res){
+    const theatreObject = {
         name: req.body.name,
         description: req.body.description,
-        casts: req.body.casts,
-        director: req.body.director,
-        trailerUrl: req.body.trailerUrl,
-        posterUrl: req.body.posterUrl,
-        language: req.body.language,
-        releaseDate: req.body.releaseDate,
-        releaseSatus: req.body.releaseSatus
+        city: req.body.city,
+        pinCode: req.body.pinCode,
     }
 
-    const movie = await Movie.create(movieObject);
-    res.status(201).send(movie);
+    const theatre = await Theatre.create(theatreObject);
+    res.status(201).send(theatre);
 }
 
-async function updateMovie(req,res){
-    let savedMovies = await Movie.findOne({
+async function updateTheatre(req,res){
+    let savedTheatre = await Theatre.findOne({
         _id: req.params.id
     })
 
-    if(!savedMovies){
+    if(!savedTheatre){
         return res.status(400).send({
-            msg: `Movie Id ${req.params.id} does not exist`
+            msg: `Theatre Id ${req.params.id} does not exist`
         })
     }
 
-    savedMovies.name = req.body.name ?  req.body.name: savedMovies.name; 
-    savedMovies.description = req.body.description ?  req.body.description : savedMovies.description; 
-    savedMovies.casts = req.body.casts != undefined ? req.body.casts : savedMovie.casts;
-    savedMovies.director = req.body.director != undefined ? req.body.director : savedMovie.director;
-    savedMovies.trailerUrl = req.body.trailerUrl != undefined ? req.body.trailerUrl : savedMovie.trailerUrl;
-    savedMovies.posterUrl = req.body.posterUrl != undefined ? req.body.posterUrl : savedMovie.posterUrl;
-    savedMovies.language = req.body.language != undefined ? req.body.language : savedMovie.language;
-    savedMovies.releaseDate = req.body.releaseDate != undefined ? req.body.releaseDate : savedMovie.releaseDate;
-    savedMovies.releaseStatus = req.body.releaseStatus != undefined ? req.body.releaseStatus : savedMovie.releaseStatus;
+    savedTheatre.name = req.body.name ?  req.body.name: savedTheatre.name; 
+    savedTheatre.description = req.body.description ?  req.body.description : savedTheatre.description; 
+    savedTheatre.city = req.body.city != undefined ? req.body.city : savedTheatre.city;
+    savedTheatre.pinCode = req.body.pinCode != undefined ? req.body.pinCode : savedTheatre.pinCode;
 
-    const updateMovie = await savedMovies.save();
-    res.send(updateMovie);
+    const updateTheatre = await savedTheatre.save();
+    res.send(updateTheatre);
 }
 
-async function deleteMovie(req,res){
-
+async function deleteTheatre(req,res){
     try{
-        await Movie.deleteOne({
+        await Theatre.deleteOne({
             _id : req.params.id
         })
-    return res.send(`Movie id ${req.params.id} got deleted `);
+    return res.send(`Theatre id ${req.params.id} got deleted `);
     }catch(err){
         return res.status(500).send({ msg : 'Internal server error'});
     }
@@ -85,7 +74,7 @@ async function deleteMovie(req,res){
 module.exports = {
     getAllTheatres,
     getTheatreBasedOnId,
-    createMovie,
-    updateMovie,
-    deleteMovie
+    createTheatre,
+    updateTheatre,
+    deleteTheatre
 }
