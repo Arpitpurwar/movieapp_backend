@@ -13,9 +13,13 @@ async function getAllTheatres(req, res){
     if(req.query.pinCode){
         reqObject.pinCode = req.query.pinCode;
     }
-    const result = await Theatre.find(reqObject);
+    let theaters = await Theatre.find(reqObject);
 
-    res.send(result);
+    if(req.query.movieId){
+        theaters = theaters.filter(theater => theater.movies.includes(req.query.movieId));
+    }
+
+    res.send(theaters);
 }
 
 async function getTheatreBasedOnId(req, res){
