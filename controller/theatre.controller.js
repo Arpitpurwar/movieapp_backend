@@ -1,4 +1,5 @@
 const Theatre = require('../models/theatre.model');
+const Movie = require('../models/movies.models');
 
 
 async function getAllTheatres(req, res){
@@ -106,11 +107,34 @@ async function updateMoviesInTheatre(req, res){
    res.send(updatedTheatre);
 }
 
+async function checkMovieInTheatre(req, res){
+    let savedTheatre = await Theatre.findOne({
+        _id: req.params.theatreId
+    })
+
+    let movie = await Movie.findOne({
+        _id: req.params.movieId
+    })
+
+    let response = {
+        msg : ''
+    }
+
+    if(savedTheatre.movies.includes(movie._id)){
+        response.msg = 'Movie is running';
+    }else{
+        response.msg = 'Movie is not running';
+    }
+
+    res.send(response);
+}
+
 module.exports = {
     getAllTheatres,
     getTheatreBasedOnId,
     createTheatre,
     updateTheatre,
     deleteTheatre,
-    updateMoviesInTheatre
+    updateMoviesInTheatre,
+    checkMovieInTheatre
 }
