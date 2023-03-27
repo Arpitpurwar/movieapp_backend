@@ -1,4 +1,5 @@
-const { getAllTheatres, getTheatreBasedOnId, createTheatre, updateTheatre, deleteTheatre } = require('../controller/theatre.controller');
+const { getAllTheatres, getTheatreBasedOnId, createTheatre,
+     updateTheatre, deleteTheatre, updateMoviesInTheatre } = require('../controller/theatre.controller');
 
 
 module.exports = (app) => {
@@ -7,4 +8,5 @@ module.exports = (app) => {
     app.post('/mba/api/v1/theatre',createTheatre); 
     app.put('/mba/api/v1/theatre/:id', updateTheatre);
     app.delete('/mba/api/v1/theatre/:id', deleteTheatre);
+    app.put('/mba/api/v1/theatre/:id/movies', updateMoviesInTheatre);
 }

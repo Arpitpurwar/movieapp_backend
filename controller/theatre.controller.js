@@ -71,10 +71,42 @@ async function deleteTheatre(req,res){
 
 }
 
+async function updateMoviesInTheatre(req, res){
+    let savedTheatre = await Theatre.findOne(
+        {
+            _id : req.params.id
+        }
+    );
+       // console.log('theatre', theatre);
+    if(!savedTheatre){
+        return res.status(400).send({
+            msg : `This theatre ${req.params.id} does not exist in DB.`
+        })
+    }
+    let movies = req.body.movieIds;// ['4567','3456']
+
+    if(req.body.insert){
+        // add movies in db...
+        movies.forEach(movieId => {
+            savedTheatre.movies.push(movieId);
+        });
+
+    }else{ // [1,2,3,4] savedTheatre -----> [1,2]
+        // movie [3,4]
+        movies.forEach(movieId => { 
+            savedTheatre.movies = savedTheatre.movies.filter(elem => elem!= movieId);
+        })
+    }
+
+   const updatedTheatre = await savedTheatre.save();
+   res.send(updatedTheatre);
+}
+
 module.exports = {
     getAllTheatres,
     getTheatreBasedOnId,
     createTheatre,
     updateTheatre,
-    deleteTheatre
+    deleteTheatre,
+    updateMoviesInTheatre
 }
