@@ -1,5 +1,5 @@
 const User = require('../models/users.models');
-const { userTypes} = require('../utils/constant')
+const { userTypes, userStatus} = require('../utils/constant')
 
 async function validateUserReqBody(req, res, next){
     if(!req.body.name){
@@ -52,6 +52,33 @@ async function validateUserReqBody(req, res, next){
     next();
 }
 
+async function validateUserProfile(req, res, next){
+    if(!req.body.name){
+        return res.status(400).send({
+            msg : 'Please provide name as well'
+        })
+    }
+
+    const existUserType = [userTypes.CLIENT, userTypes.CUSTOMER, userTypes.ADMIN];
+    const requestUserType = req.body.userType;
+
+    if(!requestUserType || !existUserType.includes(requestUserType)){
+        return res.status(400).send({
+            msg : 'please provide these three usertype CUSTOMER/ADMIN/CLIENT'
+        })
+    }
+
+    const existUserStatus = [userStatus.APPROVED, userStatus.PENDING, userStatus.REJECTED];
+    const requestUserStatus = req.body.userStatus;
+
+    if(!requestUserStatus || !existUserStatus.includes(requestUserStatus)){
+        return res.status(400).send({
+            msg : 'please provide these three userStatus APPROVED/PENDING/REJECTED'
+        })
+    }
+
+    next();
+}
 
 const isValidEmail = (email) => {
     return String(email)
@@ -61,4 +88,4 @@ const isValidEmail = (email) => {
         );
 };
 
-module.exports = {validateUserReqBody}
+module.exports = {validateUserReqBody, validateUserProfile}

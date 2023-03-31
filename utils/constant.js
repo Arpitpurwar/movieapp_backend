@@ -9,8 +9,8 @@ module.exports= {
         CLIENT: 'CLIENT'
     },
     userStatus:{
-        APPROVED: 'approved',
-        REJECTED: 'rejected',
+        APPROVED: 'APPROVED',
+        REJECTED: 'REJECTED',
         PENDING: 'PENDING'
     }
 

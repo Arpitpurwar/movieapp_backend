@@ -20,7 +20,7 @@ const { DB_URL } = require('./configs/db.config');
     try{    
         await mongoose.connect(DB_URL);
         console.log('db connected');
-       // await init();
+        //await init();
     }
     catch(err){
         console.error('error getting while connecting mongoDB', err);
