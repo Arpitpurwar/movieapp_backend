@@ -20,7 +20,7 @@ const { DB_URL } = require('./configs/db.config');
     try{    
         await mongoose.connect(DB_URL);
         console.log('db connected');
-       await init();
+       // await init();
     }
     catch(err){
         console.error('error getting while connecting mongoDB', err);
@@ -162,6 +162,7 @@ catch(err){
 require('./routes/auth.routes')(app);
 require('./routes/movie.routes')(app);
 require('./routes/theatre.routes')(app);
+require('./routes/user.routes')(app);
 
 app.listen(PORT, ()=> {
     console.log(`server is running on port: ${PORT}, please access it on http://localhost:${PORT}`)

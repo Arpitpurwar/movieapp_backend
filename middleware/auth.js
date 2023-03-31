@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/users.models');
 
 async function verifyToken(req, res, next){
     const userToken = req.headers['x-access-token'];
@@ -14,8 +15,7 @@ async function verifyToken(req, res, next){
                 msg : 'Token is not correct'
             })
         }
-        console.log('decoded', decoded);
-        req.userId = decoded.id;
+        req._id = decoded.id;
     
         next()
     }
@@ -27,8 +27,23 @@ async function verifyToken(req, res, next){
 
 }
 
+async function isAdmin(req, res, next){
+    const id = req._id;
 
+    const user = await User.findOne({
+        _id: id
+    })
+    console.log('user', user);
+    if(user && user.userType !=='ADMIN'){
+        return res.status(400).send({
+            msg :"Only Admin allowed to do this operation"
+        })
+    }
+
+    next();
+}
 
 module.exports = {
-    verifyToken
+    verifyToken,
+    isAdmin
 }
