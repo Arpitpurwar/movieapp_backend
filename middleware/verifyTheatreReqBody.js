@@ -1,6 +1,6 @@
 const Theatre = require("../models/theatre.model");
 
-validateTheatreRequestBody = async (req, res, next) => {
+async function validateTheatreRequestBody(req, res, next){
 
     //Validate the theatre  name
     if (!req.body.name) {
