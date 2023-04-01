@@ -34,7 +34,7 @@ async function isAdmin(req, res, next){
         _id: id
     })
     console.log('user', user);
-    if(user && user.userType !=='ADMIN'){
+    if(user && user.userType !=='ADMIN' && user.userStatus !== 'APPROVED'){
         return res.status(400).send({
             msg :"Only Admin allowed to do this operation"
         })
