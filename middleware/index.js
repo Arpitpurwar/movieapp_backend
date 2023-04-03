@@ -4,6 +4,7 @@ const { validateMovieReqBody } = require('./verifyMovieReqBody');
 const { verifyToken, isAdmin} = require('./auth');
 const {validateUserReqBody, validateUserProfile} = require('./validateUserReqBody')
 const {validateTheatreRequestBody} = require('./verifyTheatreReqBody')
+const { validateBookingReqBody } = require('./validateBookingReqBody')
 
 module.exports = {
     validateMovieReqBody,
@@ -11,5 +12,6 @@ module.exports = {
     isAdmin,
     validateUserReqBody,
     validateUserProfile,
-    validateTheatreRequestBody
+    validateTheatreRequestBody,
+    validateBookingReqBody,
 }

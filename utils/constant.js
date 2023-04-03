@@ -12,6 +12,7 @@ module.exports= {
         APPROVED: 'APPROVED',
         REJECTED: 'REJECTED',
         PENDING: 'PENDING'
-    }
+    },
+    ticketCost: 200
 
 }
