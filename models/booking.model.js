@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 
-
+mongoose.Promise = global.Promise;
 /**
  * Defines the schema of the booking resource to be stored in the DB
  */
 const bookingSchema = new mongoose.Schema({
-
     theatreId: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true,
@@ -53,11 +52,9 @@ const bookingSchema = new mongoose.Schema({
         type : Number
     }
 
-},{
-    //versionKey: false // this will remove the __v field, which indicates the internal revision of the document
 })
 
 
 
 const bookingModel = mongoose.model('Booking', bookingSchema);
-module.exports = mongoose.models.Booking || bookingModel;
+module.exports = bookingModel;

@@ -163,7 +163,7 @@ require('./routes/auth.routes')(app);
 require('./routes/movie.routes')(app);
 require('./routes/theatre.routes')(app);
 require('./routes/user.routes')(app);
-// require('./routes/booking.routes')(app);
+require('./routes/booking.routes')(app);
 require('./routes/payment.routes')(app);
 app.listen(PORT, ()=> {
     console.log(`server is running on port: ${PORT}, please access it on http://localhost:${PORT}`)

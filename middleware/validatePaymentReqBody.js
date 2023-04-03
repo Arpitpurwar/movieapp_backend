@@ -1,5 +1,5 @@
 const ObjectId = require('mongoose').Types.ObjectId;
-const Booking = require('../models/Booking.model');
+const Booking = require('../models/booking.model');
 
 async function validatePaymentReqBody(req, res, next){
     if(!req.body.bookingId){

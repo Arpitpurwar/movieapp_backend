@@ -1,13 +1,43 @@
 const Booking = require('../models/booking.model');
 const Payment = require('../models/payment.model');
+const User = require('../models/users.models');
+const {userTypes} = require('../utils/constant')
 
 
 async function getAllPayments(req,res){
+    let tempQuery = {}
+    const user = await User.findOne({
+        _id: req._id
+    });
 
+    if(user.userType !== userTypes.ADMIN){
+        const bookings = await Booking.find({
+            userId: user._id
+        })
+
+        const bookingIds = bookings.map( a => a._id);
+        console.log('boookingiDs', bookingIds);
+        tempQuery.bookingId = {$in: bookingIds }
+    }
+
+    try{
+        const paymentData = await Payment.find(tempQuery);
+        res.send({
+            msg: "All Payments fetched successfully",
+            paymentData
+        })
+    }
+    catch(err){
+        res.send({msg: 'get All booking api failed', err})
+    }
 }
 
 async function getPaymentOnId(req,res){
+    const paymentInfo = await Payment.findOne({
+        _id: req.params.id
+    });
 
+    res.send(paymentInfo)
 }
 
 async function createPayment(req,res){
@@ -33,7 +63,8 @@ async function createPayment(req,res){
 
         const tempPaymentObject = {
             bookingId: req.body.bookingId,
-            amount: req.body.amount
+            amount: req.body.amount,
+            status: "SUCCESS"
         }
 
         await Payment.create(tempPaymentObject);
