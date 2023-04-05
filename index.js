@@ -89,58 +89,6 @@ async function init(){
     });
     console.log("Movies inserted in the db");
 
-    await Theatre.collection.drop();
-    await Theatre.create({
-        name : "FunCinemas" ,
-        city : "Bangalore",
-        description : "Top class theatre" ,
-        pinCode : 560052,
-        movies: [movie1._id,movie2._id]
-    });
-    await Theatre.create({
-        name : "PVR Cinemas - Kormangala" ,
-        city : "Bangalore",
-        description : "PVR franchise theatre" ,
-        pinCode : 560095,
-        movies: [movie3._id,movie4._id]
-
-    });
-    await Theatre.create({
-        name : "IMax" ,
-        city : "Bangalore",
-        description : "IMax franchise theatre" ,
-        pinCode : 560095,
-        movies: [movie1._id,movie5._id]
-
-    });
-    await Theatre.create({
-        name : "Vaibhav Theatre" ,
-        city : "Bangalore",
-        description : "Economical theatre" ,
-        pinCode : 560094,
-        movies: [movie2._id,movie5._id]
-
-    });
-
-    await Theatre.create({
-        name : "Inox" ,
-        city : "Pune",
-        description : "Top class theatre" ,
-        pinCode : 411001,
-        movies: [movie4._id,movie5._id]
-
-    });
-    await Theatre.create({
-        name : "Sonmarg Theatre" ,
-        city : "Pune",
-        description : "Economical theatre" ,
-        pinCode : 411042,
-        movies: [movie1._id,movie4._id] 
-
-    });
-
-    console.log("Theatres created");
-
     await User.collection.drop();
     await User.create({
         name: "admin",
@@ -150,7 +98,93 @@ async function init(){
         userType: "ADMIN"
     })
 
+    const client1= await User.create({
+        name: "client1",
+        email: "client1@gmail.com",
+        password: bcrypt.hashSync('Welcome', 8),
+        userId: "client1",
+        userStatus: "PENDING",
+        userType: "CLIENT"
+    })
+
+
+    const client2= await User.create({
+        name: "client2",
+        email: "client2@gmail.com",
+        password: bcrypt.hashSync('Welcome', 8),
+        userId: "client2",
+        userStatus: "PENDING",
+        userType: "CLIENT"
+    })
+
+    const client3= await User.create({
+        name: "client3",
+        email: "client3@gmail.com",
+        password: bcrypt.hashSync('Welcome', 8),
+        userId: "client3",
+        userStatus: "PENDING",
+        userType: "CLIENT"
+    })
+
     console.log('Admin User has been created');
+
+    await Theatre.collection.drop();
+    await Theatre.create({
+        name : "FunCinemas" ,
+        city : "Bangalore",
+        description : "Top class theatre" ,
+        pinCode : 560052,
+        movies: [movie1._id,movie2._id],
+        ownerId: client1._id
+    });
+    await Theatre.create({
+        name : "PVR Cinemas - Kormangala" ,
+        city : "Bangalore",
+        description : "PVR franchise theatre" ,
+        pinCode : 560095,
+        movies: [movie3._id,movie4._id],
+        ownerId: client2._id
+
+    });
+    await Theatre.create({
+        name : "IMax" ,
+        city : "Bangalore",
+        description : "IMax franchise theatre" ,
+        pinCode : 560095,
+        movies: [movie1._id,movie5._id],
+        ownerId: client3._id
+
+    });
+    await Theatre.create({
+        name : "Vaibhav Theatre" ,
+        city : "Bangalore",
+        description : "Economical theatre" ,
+        pinCode : 560094,
+        movies: [movie2._id,movie5._id],
+        ownerId: client2._id
+
+    });
+
+    await Theatre.create({
+        name : "Inox" ,
+        city : "Pune",
+        description : "Top class theatre" ,
+        pinCode : 411001,
+        movies: [movie4._id,movie5._id],
+        ownerId: client1._id
+
+    });
+    await Theatre.create({
+        name : "Sonmarg Theatre" ,
+        city : "Pune",
+        description : "Economical theatre" ,
+        pinCode : 411042,
+        movies: [movie1._id,movie4._id],
+        ownerId: client3._id
+
+    });
+
+    console.log("Theatres created");
 }
 catch(err){
     console.log('error while inserting default entries in DB', err);

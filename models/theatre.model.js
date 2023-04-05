@@ -35,6 +35,10 @@ const theatreSchema = new mongoose.Schema({
         default: () => {
             return Date.now();
         }
+    },
+    ownerId: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "User"
     }
 })
 
