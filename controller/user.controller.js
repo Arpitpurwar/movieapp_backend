@@ -31,7 +31,8 @@ async function updateProfile(req, res){
     }, {
         userType: req.body.userType,
         userStatus: req.body.userStatus,
-        name: req.body.name
+        name: req.body.name,
+        email: req.body.email
     }).exec();
 
     res.send({
