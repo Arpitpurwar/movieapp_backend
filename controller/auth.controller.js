@@ -2,7 +2,7 @@ const {userTypes, userStatus} = require("../utils/constant");
 const bcrypt = require('bcrypt');
 const User = require('../models/users.models');
 const jwt = require('jsonwebtoken');
-const { response } = require("express");
+
 
 async function signUp(req, res){
     let userstatus = userStatus.APPROVED;

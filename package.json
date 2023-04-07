@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "abc": "echo hey I am from abc",
-    "prestart": "echo hey i am prestart",
-    "start": "NODE_ENV=development nodemon index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
