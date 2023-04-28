@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "abc" : "echo hey I am from abc",
+    "abc": "echo hey I am from abc",
     "prestart": "echo hey i am prestart",
     "start": "NODE_ENV=development nodemon index.js"
-
   },
   "repository": {
     "type": "git",
@@ -24,9 +23,11 @@
   },
   "homepage": "https://github.com/Arpitpurwar/movieapp_backend#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2"
   },
   "devDependencies": {
