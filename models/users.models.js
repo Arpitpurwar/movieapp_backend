@@ -1,26 +1,32 @@
 const mongoose = require('mongoose');
 
 
-const theatreSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
     },
-    description: {
+    email: {
         type: String,
-        required: true 
+        required: true,
+        unique: true
     },
-    city :{
+    userId :{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    pinCode : {
-        type: Number,
-        required: true
+    password: {
+        type: String,
+        required: true,
     },
-    movies: {
-        type: [mongoose.SchemaTypes.ObjectId],
-        ref: "Movie"
+    userType : {
+        type: String,
+        default: "CUSTOMER"
+    },
+    userStatus: {
+        type: String,
+        default: "APPROVED"
     },
     createdAt: {
         // I want to default to a new date
@@ -35,11 +41,7 @@ const theatreSchema = new mongoose.Schema({
         default: () => {
             return Date.now();
         }
-    },
-    ownerId: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "User"
     }
 })
 
-module.exports = mongoose.model('Theatre', theatreSchema);
+module.exports = mongoose.model('User', userSchema);
